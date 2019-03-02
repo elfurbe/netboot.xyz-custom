@@ -15,14 +15,16 @@ goto ${custom_choice}
 goto custom_exit
 
 :CentOS_7
+set repo http://ditto.hpc.arizona.edu/centos/7/os/x86_64
 imgfree
-kernel http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/vmlinuz
+kernel http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/vmlinuz repo=${repo} text ${console} BOOTIF=${netX/mac} ip=dhcp initrd=initrd.img
 initrd http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/initrd.img
 boot || goto custom_exit
 
 :CentOS_6
+set repo http://ditto.hpc.arizona.edu/centos/6/os/x86_64
 imgfree
-kernel http://ditto.hpc.arizona.edu/centos/6/os/x86_64/images/pxeboot/vmlinuz
+kernel http://ditto.hpc.arizona.edu/centos/6/os/x86_64/images/pxeboot/vmlinuz repo=${repo} text ${console} BOOTIF=${netX/mac} ip=dhcp initrd=initrd.img
 initrd http://ditto.hpc.arizona.edu/centos/6/os/x86_64/images/pxeboot/initrd.img
 boot || goto custom_exit
 
