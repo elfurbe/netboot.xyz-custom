@@ -6,8 +6,8 @@
 clear custom_choice
 menu Local Options
 item --gap CentOS
-item CentOS_7 ${space} Loading a kernel and initrd
-item CentOS_6 ${space} Loading a kernel and initrd
+item CentOS_7 ${space} CentOS 7 from local mirror
+item CentOS_6 ${space} CentOS 6 from local mirror
 #item PVE_5.3 ${space} Loading an ISO
 choose custom_choice || goto custom_exit
 echo ${cls}
