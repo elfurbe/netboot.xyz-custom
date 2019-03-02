@@ -3,10 +3,29 @@
 ### netboot.xyz-custom menu
 ###
 
-:start
-echo Hello world!
-sleep 10
+clear custom_choice
+menu Local Options
+item --gap CentOS
+item CentOS_7 ${space} Loading a kernel and initrd
+item CentOS_6 ${space} Loading a kernel and initrd
+#item PVE_5.3 ${space} Loading an ISO
+choose custom_choice || goto custom_exit
+echo ${cls}
+goto ${custom_choice}
 goto custom_exit
 
+:CentOS_7
+imgfree
+kernel http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/vmlinuz
+initrd http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/initrd.img
+boot || goto custom_exit
+
+:CentOS_6
+imgfree
+kernel http://ditto.hpc.arizona.edu/centos/6/os/x86_64/images/pxeboot/vmlinuz
+initrd http://ditto.hpc.arizona.edu/centos/6/os/x86_64/images/pxeboot/initrd.img
+boot || goto custom_exit
+
 :custom_exit
-exit 0
+chain utils.ipxe
+exit
