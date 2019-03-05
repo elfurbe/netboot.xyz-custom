@@ -8,6 +8,7 @@ menu Local Options
 item --gap CentOS
 item c7 ${space} CentOS 7 from local mirror
 item c7t ${space} CentOS 7 from local mirror (text mode)
+item c7ks ${space} CentOS 7 from local mirror (kickstart dhcp)
 item c6 ${space} CentOS 6 from local mirror
 item c6t ${space} CentOS 6 from local mirror (text mode)
 #item PVE_5.3 ${space} Loading an ISO
@@ -27,6 +28,14 @@ boot || goto custom_exit
 set repo http://ditto.hpc.arizona.edu/centos/7/os/x86_64
 imgfree
 kernel http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/vmlinuz repo=${repo} text ${console} BOOTIF=${netX/mac} ip=dhcp initrd=initrd.img
+initrd http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/initrd.img
+boot || goto custom_exit
+
+:c7ks
+set repo http://ditto.hpc.arizona.edu/centos/7/os/x86_64
+set ks http://ditto.hpc.arizona.edu/kickstart/ks.cfg
+imgfree
+kernel http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/vmlinuz repo=${repo} ks=${ks} text ${console} BOOTIF=${netX/mac} ip=dhcp initrd=initrd.img
 initrd http://ditto.hpc.arizona.edu/centos/7/os/x86_64/images/pxeboot/initrd.img
 boot || goto custom_exit
 
